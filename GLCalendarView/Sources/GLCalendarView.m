@@ -22,6 +22,8 @@ static NSString * const CELL_REUSE_IDENTIFIER = @"DayCell";
 
 @property (nonatomic, strong) UILongPressGestureRecognizer *dragBeginDateGesture;
 @property (nonatomic, strong) UILongPressGestureRecognizer *dragEndDateGesture;
+@property (nonatomic, strong) UILongPressGestureRecognizer *deleteDateGesture;
+
 
 @property (nonatomic) BOOL draggingBeginDate;
 @property (nonatomic) BOOL draggingEndDate;
@@ -90,6 +92,11 @@ static NSString * const CELL_REUSE_IDENTIFIER = @"DayCell";
     
     [self.collectionView addGestureRecognizer:self.dragBeginDateGesture];
     [self.collectionView addGestureRecognizer:self.dragEndDateGesture];
+    
+    self.deleteDateGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(deleteDateRange:)];
+    self.deleteDateGesture.delegate=self;
+    self.deleteDateGesture.minimumPressDuration=0.3;
+    [self.collectionView addGestureRecognizer:self.deleteDateGesture];
     
     [self addSubview:self.magnifierContainer];
     self.magnifierContainer.hidden = YES;
@@ -349,6 +356,9 @@ static NSString * const CELL_REUSE_IDENTIFIER = @"DayCell";
 }
 
 # pragma mark - Edit range
+- (void)deleteDateRange:(UIPanGestureRecognizer *)recognizer {
+    [self removeRange:self.rangeUnderEdit];
+}
 
 - (void)beginToEditRange:(GLCalendarDateRange *)range
 {
@@ -369,7 +379,7 @@ static NSString * const CELL_REUSE_IDENTIFIER = @"DayCell";
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)recognizer
 {
     if (!self.rangeUnderEdit) {
-        return NO;
+            return NO;
     }
     if (recognizer == self.dragBeginDateGesture) {
         CGPoint location = [recognizer locationInView:self.collectionView];
@@ -386,6 +396,9 @@ static NSString * const CELL_REUSE_IDENTIFIER = @"DayCell";
         if (CGRectContainsPoint(rectForEndDate, location)) {
             return YES;
         }
+    }
+    if (recognizer==self.deleteDateGesture) {
+        return YES;
     }
     return NO;
 }
