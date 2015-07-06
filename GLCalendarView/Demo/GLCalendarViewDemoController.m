@@ -62,7 +62,7 @@
 
 - (GLCalendarDateRange *)calenderView:(GLCalendarView *)calendarView rangeToAddWithBeginDate:(NSDate *)beginDate
 {
-    NSDate* endDate = [GLDateUtils dateByAddingDays:3 toDate:beginDate];
+    NSDate* endDate = [GLDateUtils dateByAddingDays:0 toDate:beginDate];
     GLCalendarDateRange *range = [GLCalendarDateRange rangeWithBeginDate:beginDate endDate:endDate];
     range.backgroundColor = UIColorFromRGB(0x80ae99);
     range.editable = YES;
