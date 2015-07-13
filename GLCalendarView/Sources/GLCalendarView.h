@@ -18,8 +18,12 @@
 - (void)calenderView:(GLCalendarView *)calendarView finishEditRange:(GLCalendarDateRange *)range continueEditing:(BOOL)continueEditing;
 - (BOOL)calenderView:(GLCalendarView *)calendarView canUpdateRange:(GLCalendarDateRange *)range toBeginDate:(NSDate *)beginDate endDate:(NSDate *)endDate;
 - (void)calenderView:(GLCalendarView *)calendarView didUpdateRange:(GLCalendarDateRange *)range toBeginDate:(NSDate *)beginDate endDate:(NSDate *)endDate;
-@end
 
+@optional
+- (void)calenderViewDidScroll:(GLCalendarView *)calendarView
+              toFirstShowDate:(NSDate *)date;
+
+@end
 
 @interface GLCalendarView : UIView
 @property (nonatomic) CGFloat padding UI_APPEARANCE_SELECTOR;

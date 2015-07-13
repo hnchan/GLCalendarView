@@ -91,6 +91,11 @@
     NSLog(@"did update range: %@", range);
 }
 
+- (void)calenderViewDidScroll:(GLCalendarView *)calendarView
+              toFirstShowDate:(NSDate *)date {
+    NSLog(@"Hi, calendarView scrolled, get the first show date %@", date);
+}
+
 - (IBAction)deleteButtonPressed:(id)sender
 {
     if (self.rangeUnderEdit) {

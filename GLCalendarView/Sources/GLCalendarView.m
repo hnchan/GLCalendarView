@@ -341,6 +341,19 @@ static NSString * const CELL_REUSE_IDENTIFIER = @"DayCell";
 {
     // update month cover
     self.monthCoverView.contentOffset = self.collectionView.contentOffset;
+    NSArray *indexPathsOfVisibleStories =
+    [self.collectionView indexPathsForVisibleItems];
+    NSArray *sortedIndexPaths = [indexPathsOfVisibleStories
+                                 sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+                                     NSIndexPath *path1 = (NSIndexPath *)obj1;
+                                     NSIndexPath *path2 = (NSIndexPath *)obj2;
+                                     return [path1 compare:path2];
+                                 }];
+    
+    // Assume one week after should be current month
+    GLCalendarDayCell *cell = (GLCalendarDayCell *)
+    [self.collectionView cellForItemAtIndexPath:sortedIndexPaths[0]];
+    [self.delegate calenderViewDidScroll:self toFirstShowDate:cell.date];
 }
 
 - (void)scrollViewWillEndDragging:(UIScrollView *)scrollView
