@@ -119,7 +119,7 @@ static NSString * const CELL_REUSE_IDENTIFIER = @"DayCell";
     self.weekDayTitle.backgroundColor= appearance.weekDayTitleBackgroundColor ?: [UIColor whiteColor];
     self.monthCoverView.textAttributes = self.monthCoverAttributes;
 
-    NSArray *titles = @[@"Sun", @"Mon", @"Tue", @"Wed", @"Thu", @"Fri", @"Sun"];
+    NSArray *titles = @[@"Sun", @"Mon", @"Tue", @"Wed", @"Thu", @"Fri", @"Sat"];
     for (int i = 0; i < titles.count; i++) {
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, width, 20)];
         label.textAlignment = NSTextAlignmentCenter;
